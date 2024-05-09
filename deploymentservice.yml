@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-app-deployment2 #The name of the Kubernetes 
+        #Deployment to be created in the Kubernetes cluster
+  labels:
+    app: notes-app2
+spec:
+  replicas: 2 #The number of pods to be created in the 
+   #Kubernetes cluster for the React.js application container
+  selector:
+    matchLabels:
+      app: notes-app2
+  template:
+    metadata:
+      labels:
+        app: notes-app2 
+    spec:
+      containers:
+      - name: notes-app2 #The name of the react.js application container
+        #The Docker image for building the React.js application container
+        image: quangvulinh/express-app 
+        ports:
+        - containerPort: 8081 #The port for the React.js application container
+
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  #The name of the Kubernetes Service to be created 
+  #in the Kubernetes cluster
+  name: service2 
+spec:
+  selector:
+    app: notes-app2 
+  type: LoadBalancer #Type of the Kubernetes Service
+  ports:
+  - protocol: TCP
+    port: 8082 #Service port
+    targetPort: 8081 #The port for the React.js application container

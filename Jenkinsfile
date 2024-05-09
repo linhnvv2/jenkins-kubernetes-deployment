@@ -32,10 +32,7 @@ pipeline {
     stage('Deploying express.js container to Kubernetes') {
       steps {
         script {
-            kubernetesDeploy(configs: [
-                deployment: readFile("deployment.yaml"),
-                service: readFile("service.yaml")
-            ], kubeconfigId: "kubeconfig")
+          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
         }
       }
     }
