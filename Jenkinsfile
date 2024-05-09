@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Pushing Image') {
       environment {
-          registryCredential = 'dockerhub-credentials'
+          registryCredential = 'dockerhublogin'
            }
       steps{
         script {
@@ -33,7 +33,7 @@ pipeline {
       steps {
         script {
           kubernetesDeploy(configs: "deployment.yaml", 
-                                         "service.yaml")
+                                         "service.yaml",kubeconfigId: "kubernetes")
         }
       }
     }
