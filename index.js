@@ -8,7 +8,7 @@ const app = express();
 
 app.get('/', function(req, res) {
 
-    res.send('Express3 Hello World Application!\n');
+    res.send('Express4 Hello World Application k8s cicd!\n');
 
 });
 
